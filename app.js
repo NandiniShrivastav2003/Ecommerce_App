@@ -1,6 +1,6 @@
-if(process.env.NODE_ENV != "production") {
-    require('dotenv').config({ path : "./config.env"})
-} 
+// if(process.env.NODE_ENV != "production") {
+//     require('dotenv').config({ path : "./config.env"})
+// } 
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -12,10 +12,10 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
-const dburl=process.env.DB_URL  || "mongodb://localhost:27017/shopping-app"
-const Port=process.env.PORT||5000
-const secretValue=process.env.SESSION_SECRET || "weneedsomebettersecret"
-mongoose.connect(dburl)
+//const dburl=process.env.DB_URL  || "mongodb://localhost:27017/shopping-app"
+//const Port=process.env.PORT||5000
+//const secretValue=process.env.SESSION_SECRET || "weneedsomebettersecret"
+mongoose.connect("mongodb://localhost:27017/shopping-app")
     .then(() => console.log('DB Connected'))
     .catch((err) => console.log(err));
 
@@ -29,7 +29,7 @@ app.use(methodOverride('_method'));
 
 
 const sessionConfig = {
-    secret: secretValue,
+    secret: "weneedsomebettersecret",
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -78,8 +78,8 @@ app.use(reviewRoutes);
 app.use(authRoutes);
 
 
-//const port = 5000;
+const port = 5000;
 
-app.listen(Port, () => {
-    console.log(`server running at port ${Port}`);
+app.listen(port, () => {
+    console.log(`server running at port ${port}`);
 });
