@@ -1,12 +1,12 @@
-// if(process.env.NODE_ENV != "production") {
-//     require('dotenv').config({ path : "./config.env"})
-// }
+if(process.env.NODE_ENV != "production") {
+    require('dotenv').config({ path : "./config.env"})
+}
 const DB_URL = process.env.DB_URL
 const mongoose = require('mongoose');
 const Product = require('./models/product');
 
 
-mongoose.connect("mongodb://localhost:27017/shopping-app")
+mongoose.connect(DB_URL)
     .then(() => console.log('DB Connected'))
     .catch((err) => console.log(err));
 
